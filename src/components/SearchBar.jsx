@@ -7,23 +7,23 @@ export default class SearchBar extends Component {
   };
   onFormSubmit = (event) => {
     event.preventDefault();
-    // TODO callback from parent
+    this.props.onFormSubmit(this.state.term);
   };
   render() {
     return (
       <div className="ui segment search-bar">
         <form className="ui category search" onSubmit={this.onFormSubmit}>
           <label htmlFor="search">Search Videos: </label>
-          <div class="ui icon input">
+          <div className="ui icon input">
             <input
-              class="prompt"
+              className="prompt"
               type="search"
               name="search"
               id="search"
               value={this.state.term}
               onChange={this.onInputChange}
             />
-            <i class="search icon"></i>
+            <i className="search icon"></i>
           </div>
           <div>
             <button className="ui primary button">Search</button>
