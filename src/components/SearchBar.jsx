@@ -2,11 +2,17 @@ import React, { Component } from "react";
 
 export default class SearchBar extends Component {
   state = { term: "" };
-  onInputChange = () => {};
+  onInputChange = (event) => {
+    this.setState({ term: event.target.value });
+  };
+  onFormSubmit = (event) => {
+    event.preventDefault();
+    // TODO callback from parent
+  };
   render() {
     return (
       <div className="ui segment search-bar">
-        <form className="ui category search" action="" preventDefault>
+        <form className="ui category search" onSubmit={this.onFormSubmit}>
           <label htmlFor="search">Search Videos: </label>
           <div class="ui icon input">
             <input
@@ -18,6 +24,9 @@ export default class SearchBar extends Component {
               onChange={this.onInputChange}
             />
             <i class="search icon"></i>
+          </div>
+          <div>
+            <button className="ui primary button">Search</button>
           </div>
         </form>
       </div>
