@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SearchBar from "./SearchBar";
 import VideoList from "./VideoList";
+import VideoDetail from "./VideoDetail";
 import youtube from "../apis/youtube";
 
 if (process.env.NODE_ENV !== "production") {
@@ -15,18 +16,16 @@ export default class App extends Component {
         q: term,
       },
     });
-    console.log(res);
     this.setState({ videos: res.data.items });
-    console.log(this.state.videos);
   };
   onVideoSelect = (video) => {
-    console.log("Form the onVideoSelect method", video);
+    this.setState({ selectedVideo: video });
   };
   render() {
     return (
       <div className="ui container">
-        <SearchBar onFormSubmit={this.onSearchSubmit} />I have{" "}
-        {this.state.videos.length} videos!
+        <SearchBar onFormSubmit={this.onSearchSubmit} />
+        <VideoDetail video={this.state.selectedVideo} />
         <VideoList
           onVideoSelect={this.onVideoSelect}
           videos={this.state.videos}
