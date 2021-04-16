@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import randomWords from "random-words";
 import SearchBar from "./SearchBar";
 import VideoList from "./VideoList";
 import VideoDetail from "./VideoDetail";
@@ -10,13 +11,16 @@ if (process.env.NODE_ENV !== "production") {
 
 export default class App extends Component {
   state = { videos: [], selectedVideo: null };
+  componentDidMount() {
+    this.onSearchSubmit(randomWords());
+  }
   onSearchSubmit = async (term) => {
     const res = await youtube.get("search", {
       params: {
         q: term,
       },
     });
-    this.setState({ videos: res.data.items });
+    this.setState({ videos: res.data.items, selectedVideo: res.data.items[0] });
   };
   onVideoSelect = (video) => {
     this.setState({ selectedVideo: video });
