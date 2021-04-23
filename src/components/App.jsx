@@ -10,21 +10,8 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 export default function App() {
-  const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
 
-  useEffect(() => {
-    onSearchSubmit(randomWords());
-  }, []);
-
-  const onSearchSubmit = async (term) => {
-    const res = await youtube.get("/search", {
-      params: {
-        q: term,
-      },
-    });
-
-    setVideos(res.data.items);
     setSelectedVideo(res.data.items[0]);
   };
 
