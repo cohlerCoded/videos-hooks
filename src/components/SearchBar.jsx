@@ -12,7 +12,7 @@ export default class SearchBar extends Component {
   render() {
     return (
       <div className="ui segment search-bar">
-        <form className="ui category search" onSubmit={this.onFormSubmit}>
+        <form className="ui form" onSubmit={this.onFormSubmit}>
           <label htmlFor="search">Search Videos: </label>
           <div className="ui icon input">
             <input
@@ -23,10 +23,9 @@ export default class SearchBar extends Component {
               value={this.state.term}
               onChange={this.onInputChange}
             />
-            <i className="search icon"></i>
-          </div>
-          <div>
-            <button className="ui primary button">Search</button>
+            <button className="ui primary button">
+              <i className="search icon"></i>
+            </button>
           </div>
         </form>
       </div>
