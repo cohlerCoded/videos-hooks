@@ -3,7 +3,7 @@ import randomWords from "random-words";
 import SearchBar from "./SearchBar";
 import VideoList from "./VideoList";
 import VideoDetail from "./VideoDetail";
-import youtube from "../apis/youtube";
+import useVideos from "../hooks/useVideos";
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
@@ -11,13 +11,15 @@ if (process.env.NODE_ENV !== "production") {
 
 export default function App() {
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [videos, search] = useVideos(randomWords());
 
-    setSelectedVideo(res.data.items[0]);
-  };
+  useEffect(() => {
+    setSelectedVideo(videos[0]);
+  }, [videos]);
 
   return (
     <div className="ui container">
-      <SearchBar onFormSubmit={onSearchSubmit} />
+      <SearchBar onFormSubmit={search} />
       <div className="ui grid">
         <div className="ui row">
           <div className="eleven wide column">
