@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import randomWords from "random-words";
 import SearchBar from "./SearchBar";
 import VideoList from "./VideoList";
@@ -12,19 +12,22 @@ if (process.env.NODE_ENV !== "production") {
 export default function App() {
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
+
   useEffect(() => {
     onSearchSubmit(randomWords());
-    return () => {};
   }, []);
+
   const onSearchSubmit = async (term) => {
     const res = await youtube.get("/search", {
       params: {
         q: term,
       },
     });
+
     setVideos(res.data.items);
     setSelectedVideo(res.data.items[0]);
   };
+
   return (
     <div className="ui container">
       <SearchBar onFormSubmit={onSearchSubmit} />
